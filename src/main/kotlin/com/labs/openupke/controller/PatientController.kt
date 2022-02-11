@@ -11,13 +11,20 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/patient")
 class PatientController (@Autowired val patientService: PatientService) {
 
+    @GetMapping
+    fun index() : ResponseEntity<String> {
+        return ResponseEntity.ok().build()
+    }
+
     @PostMapping
+    @RequestMapping("/add")
     fun addPatient(@RequestBody patient : Patient) : ResponseEntity<String> {
         patientService.addPatient(patient)
         return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 
-    @PatchMapping
+    @PutMapping
+    @RequestMapping("/update")
     fun updatePatient(@RequestBody patient: Patient) : ResponseEntity<String> {
         patientService.updatePatient(patient)
         return ResponseEntity.ok().build()

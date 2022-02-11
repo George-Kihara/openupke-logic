@@ -13,7 +13,7 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
 
     fun updatePatient(patient: Patient) {
         val existingPatient : Patient = patientRepository
-                .findById(patient.id)
+                .findById(patient.id!!)
                 .orElseThrow {throw RuntimeException("Cannot find patient by ID")}
         existingPatient.patientName = patient.patientName
         patientRepository.save(existingPatient)

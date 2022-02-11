@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component
 @Document("patient")
 data class Patient(
         @Id
-        val id: String,
+        val id: String ?= null,
         @Field(name = "name")
         @Indexed(unique = true)
-        var patientName:String
+        var patientName:String ?= null
 )
