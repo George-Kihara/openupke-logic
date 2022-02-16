@@ -30,4 +30,16 @@ class PatientController (@Autowired val patientService: PatientService) {
         return ResponseEntity.ok().build()
     }
 
+    @PostMapping
+    @RequestMapping("/getbyname")
+    fun getPatient(@RequestBody patient: Patient) : Patient {
+        return patientService.getPatientByName(patient.patientName!!)
+    }
+
+    @PostMapping
+    @RequestMapping("/getbyid")
+    fun getPatientById(@RequestBody patient: Patient) : Patient {
+        return patientService.getPatientById(patient.id!!)
+    }
+
 }

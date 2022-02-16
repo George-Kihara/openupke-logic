@@ -23,7 +23,11 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
 
     fun getPatientByName(name : String) : Patient =
             patientRepository.findByName(name)
-                    .orElseThrow {throw RuntimeException("Cannot find patient by name")}
+                    .orElseThrow {throw RuntimeException("Cannot find patient by name: $name")}
+
+    fun getPatientById(id : String) : Patient =
+            patientRepository.findByUniqueId(id)
+                    .orElseThrow {throw RuntimeException("Cannot find patient by id: $id")}
 
     fun deletePatient(id : String) =
             patientRepository.deleteById(id)

@@ -12,4 +12,7 @@ interface PatientRepository : MongoRepository<Patient, String> {
     @Query("{'name':?0}")
     fun findByName(name : String) : Optional<Patient>
 
+    @Query("{'id':?0}")
+    fun findByUniqueId(id : String) : Optional<Patient>
+
 }
