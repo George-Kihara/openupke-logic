@@ -1,6 +1,8 @@
 package com.labs.openupke.controller
 
 import com.labs.openupke.model.Patient
+import com.labs.openupke.model.StandardResponse
+import com.labs.openupke.model.StandardResponsePayload
 import com.labs.openupke.service.PatientService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -18,28 +20,40 @@ class PatientController (@Autowired val patientService: PatientService) {
 
     @PostMapping
     @RequestMapping("/add")
-    fun addPatient(@RequestBody patient : Patient) : ResponseEntity<String> {
+    fun addPatient(@RequestBody patient : Patient) : StandardResponse {
         patientService.addPatient(patient)
-        return ResponseEntity.status(HttpStatus.CREATED).build()
+        return StandardResponse()
     }
 
     @PutMapping
     @RequestMapping("/update")
-    fun updatePatient(@RequestBody patient: Patient) : ResponseEntity<String> {
+    fun updatePatient(@RequestBody patient: Patient) : StandardResponse {
         patientService.updatePatient(patient)
-        return ResponseEntity.ok().build()
+        return StandardResponse()
     }
 
     @PostMapping
     @RequestMapping("/getbyname")
-    fun getPatient(@RequestBody patient: Patient) : Patient {
-        return patientService.getPatientByName(patient.patientName!!)
+    fun getPatient(@RequestBody patient: Patient) : StandardResponsePayload {
+        val response = StandardResponsePayload()
+        response.payload = patientService.getPatientByName(patient.patientName!!)
+        return response
     }
 
     @PostMapping
     @RequestMapping("/getbyid")
-    fun getPatientById(@RequestBody patient: Patient) : Patient {
-        return patientService.getPatientById(patient.id!!)
+    fun getPatientById(@RequestBody patient: Patient) : StandardResponsePayload {
+        val response = StandardResponsePayload()
+        response.payload = patientService.getPatientById(patient.id!!)
+        return response
+    }
+
+    @GetMapping
+    @RequestMapping("/getallpatients")
+    fun getAllPatients() : StandardResponsePayload {
+        val response = StandardResponsePayload()
+        response.payload = patientService.getAllPatients()
+        return response
     }
 
 }
