@@ -32,4 +32,8 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
     fun deletePatient(id : String) =
             patientRepository.deleteById(id)
 
+    fun signInPatient() {
+
+    }
+
 }
