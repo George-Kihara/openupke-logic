@@ -1,5 +1,6 @@
 package com.labs.openupke.controller
 
+import com.google.firebase.auth.FirebaseAuth
 import com.labs.openupke.model.Patient
 import com.labs.openupke.model.StandardResponse
 import com.labs.openupke.model.StandardResponsePayload
@@ -67,5 +68,16 @@ class PatientController (@Autowired val patientService: PatientService) {
         response.payload = patientService.getAllPatients()
         return response
     }
+
+    @GetMapping()
+    @RequestMapping("/generatetoken")
+    fun generateFirebaseToken() : Future<StandardResponsePayload> {
+        val responsePayload = CompletableFuture<StandardResponsePayload>()
+        responsePayload.complete(StandardResponsePayload(
+                payload = FirebaseAuth.getInstance().createCustomToken("11jkYR6yzWOsYD7gcjC1duVG3UE3")
+        ))
+        return responsePayload
+    }
+
 
 }
