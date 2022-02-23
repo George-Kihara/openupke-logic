@@ -1,9 +1,12 @@
 package com.labs.openupke.service
 
+import com.google.firebase.auth.FirebaseAuth
 import com.labs.openupke.model.Patient
 import com.labs.openupke.repository.PatientRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Future
 
 @Service
 class PatientService (@Autowired val patientRepository: PatientRepository) {
@@ -34,6 +37,22 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
 
     fun signInPatient() {
 
+    }
+
+    fun verifyFirebaseToken(skey: String?) : Future<Int> {
+        val response = CompletableFuture<Int>()
+        try {
+            var status = 200
+            if (skey == null ||
+                    skey == "") {
+                status = 0
+            }
+            FirebaseAuth.getInstance().verifyIdToken(skey)
+            response.complete(status)
+        } catch (e : Exception) {
+            response.complete(0)
+        }
+        return response
     }
 
 }
