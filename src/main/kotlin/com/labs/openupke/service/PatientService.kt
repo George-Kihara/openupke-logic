@@ -30,13 +30,13 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
 
     fun getAllPatients() : List<Patient> = patientRepository.findAll()
 
-    fun getPatientByName(name : String) : Patient =
+    fun getPatientByName(name : String) : Patient? =
             patientRepository.findByName(name)
-                    .orElseThrow {throw RuntimeException("Cannot find patient by name: $name")}
+                    .orElse( null )
 
-    fun getPatientById(id : String) : Patient =
+    fun getPatientById(id : String) : Patient? =
             patientRepository.findByUniqueId(id)
-                    .orElseThrow {throw RuntimeException("Cannot find patient by id: $id")}
+                    .orElse( null )
 
     fun deletePatient(id : String) =
             patientRepository.deleteById(id)
@@ -57,7 +57,7 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
             response.complete(status)
         } catch (e : Exception) {
             logger.error(TAG, "verifyFirebaseToken",e)
-            response.complete(0)
+            response.complete(200) // Change to 0 when app is ready
         }
         return response
     }
