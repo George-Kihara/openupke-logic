@@ -35,7 +35,7 @@ class PatientController (@Autowired val patientService: PatientService) {
 
         if (patientService.verifyFirebaseToken(skey).get() == 200) {
             if (patientService.getPatientById(patient.id!!) == null) {
-                if (patientService.getPatientByName(patient.patientName!!) == null) {
+                if (patientService.getPatientByName(patient.name!!) == null) {
                     patientService.addPatient(patient)
                     response.complete(StandardResponse())
                 } else {
@@ -73,7 +73,7 @@ class PatientController (@Autowired val patientService: PatientService) {
     @RequestMapping("/getbyname")
     fun getPatient(@RequestBody patient: Patient) : StandardResponsePayload {
         val response = StandardResponsePayload()
-        response.payload = patientService.getPatientByName(patient.patientName!!)
+        response.payload = patientService.getPatientByName(patient.name!!)
         return response
     }
 

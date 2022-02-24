@@ -6,10 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.stereotype.Component
 
 @Component
-@Document("patient")
-data class Patient(
+@Document("therapist")
+data class Therapist(
         @Id
         val id: String ?= null,
+        var name:String ?= null,
         @Indexed(unique = true)
-        var name:String ?= null
+        var email:String ?= null
 )

@@ -24,7 +24,7 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
         val existingPatient : Patient = patientRepository
                 .findById(patient.id!!)
                 .orElseThrow {throw RuntimeException("Cannot find patient by ID")}
-        existingPatient.patientName = patient.patientName
+        existingPatient.name = patient.name
         patientRepository.save(existingPatient)
     }
 
@@ -40,10 +40,6 @@ class PatientService (@Autowired val patientRepository: PatientRepository) {
 
     fun deletePatient(id : String) =
             patientRepository.deleteById(id)
-
-    fun signInPatient() {
-
-    }
 
     fun verifyFirebaseToken(skey: String?) : Future<Int> {
         val response = CompletableFuture<Int>()
