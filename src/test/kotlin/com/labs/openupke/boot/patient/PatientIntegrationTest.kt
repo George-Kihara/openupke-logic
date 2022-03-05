@@ -31,7 +31,8 @@ class PatientIntegrationTest {
     @Test
     @Throws(Exception::class)
     fun savePatientReturnsHttpStatusOk() {
-        this.patientRepository.insert(Patient(
+        this.patientRepository.insert(
+                Patient(
                 "testId",
                 "testName"
         ))
