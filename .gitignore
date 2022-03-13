@@ -158,4 +158,7 @@ buildNumber.properties
 # "temporary" build files
 /target
 
+# firebase config file
+/src/main/resources/firebase_config.json
+
 

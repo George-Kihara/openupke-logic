@@ -12,7 +12,7 @@ import java.io.FileInputStream
 class OpenupkeApplication
 
 fun main(args: Array<String>) {
-	val serviceAccount = FileInputStream(System.getenv("FIREBASE_SDK"))
+	val serviceAccount = FileInputStream("src/main/resources/firebase_config.json")
 	val options: FirebaseOptions = FirebaseOptions.builder()
 			.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 			.build()
